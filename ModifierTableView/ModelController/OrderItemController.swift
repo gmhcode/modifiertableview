@@ -24,8 +24,35 @@ class OrderItemController{
         currentOrderItem = newOrderItem
     }
     
-    func addModifierViews(order: OrderItem){
+    func addModifierView(order: OrderItem) {
+//        var one = 1
+//        for i in order.stackView.arrangedSubviews{
+//            if one == 1 {
+//                one += 1
+//                continue
+//            } else{
+//                order.stackView.removeArrangedSubview(i)
+//
+//            }
+//        }
         
-    }
-    
+        guard let modifiers = order.modifiers else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
+        
+        
+        
+        for i in modifiers {
+            
+        guard let index = modifiers.firstIndex(of: i) else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
+            
+        let newLabel: UILabel = {
+            
+            let label = UILabel()
+            label.text = modifiers[index].name
+            return label
+        }()
+        
+        order.stackView.addArrangedSubview(newLabel)
+        }
+        
+    } 
 }

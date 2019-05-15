@@ -79,21 +79,28 @@ extension ViewControllerWithTable: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! TableViewCell
         
-
+        
+       
         
         cell.orderItem = orders[indexPath.row]
+        
+        cell.growStackView()
+        
+//        OrderItemController.shared.addModifierView(order: orders[indexPath.row])
+        
+        
+        
+//        THIS FUCKS IT UP
+//        orders[indexPath.row].stackView = cell.stackView
+//        cell.stackView = orders[indexPath.row].stackView
+        
         
         let stackHeight = defaultCellHeight + cell.stackView.frame.height
 //        print("❇️🆔\(stackHeight)")
         
         cellSizes = stackHeight
         
-//        if cellSizes == nil {
-//            cellSizes = [stackHeight]
-//        }
-//        else {
-//            cellSizes?.append(stackHeight)
-//        }
+
         
         
         return cell

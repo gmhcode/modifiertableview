@@ -21,12 +21,21 @@ class TableViewCell: UITableViewCell {
         }
     }
     
+    
+    
     func setViews(){
-        
         print("🅰️\(String(describing: orderItem?.modifiers))")
         
         itemLabel.text = orderItem?.name
-        growStackView()
+//        guard let orderItem = orderItem else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
+        
+        
+//        orderItem.stackView = stackView
+//        OrderItemController.shared.addModifierView(order: orderItem)
+//        stackView = orderItem.stackView
+        
+//        growStackView()
+        
     }
     
     
@@ -51,11 +60,13 @@ class TableViewCell: UITableViewCell {
 
 
         if modifiers.count > (stackView.subviews.count - 3){
-            
+
             let newLabel: UILabel = {
 
                 let label = UILabel()
                 label.text = modifiers[modifiers.count - 1].name
+                label.layer.frame.size.height = 10
+                label.textAlignment = .center
                 return label
 
             }()
@@ -68,7 +79,7 @@ class TableViewCell: UITableViewCell {
         }
         
         
-        
+
 //        if modifiers.count > (stackView.subviews.count - 3){
 //        removeViews(stackView: stackView)
 //        for (index,i) in modifiers.enumerated(){
@@ -78,7 +89,9 @@ class TableViewCell: UITableViewCell {
 //
 //                let label = UILabel()
 //                label.text = modifiers[index].name
+//                label.layer.frame.size.height = 10
 //                return label
+//
 //
 //            }()
 //
