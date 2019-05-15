@@ -10,15 +10,17 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var itemLabel: UILabel!
+    
     
     var orderItem : OrderItem?{
         didSet {
-            
+            setViews()
         }
     }
     
     func setViews(){
-        
+        itemLabel.text = orderItem?.name
     }
     
     

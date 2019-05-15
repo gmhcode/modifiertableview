@@ -20,6 +20,7 @@ class ViewController: UIViewController {
             OrderItemController.shared.orders.append(contentsOf: newValue)
         }
     }
+    var selectedOrder : OrderItem?
     
     
     
@@ -41,6 +42,12 @@ class ViewController: UIViewController {
         collectionView.reloadData()
         
     }
+    
+    @IBAction func addModifierButtonTapped(_ sender: Any) {
+        selectedOrder?.modifiers?.append(OrderItem(name: "modifier \(selectedOrder?.modifiers?.count)", isModifierFor: selectedOrder))
+    }
+    
+    
 }
 
 
@@ -56,9 +63,18 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         
+        cell.orderItem = orders[indexPath.row]
         
         return cell
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        selectedOrder = orders[indexPath.row]
+    }
+    
+    
 }
