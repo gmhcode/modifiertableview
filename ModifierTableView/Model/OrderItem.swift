@@ -10,13 +10,26 @@
 import UIKit
 class OrderItem{
     
-    var isModifierFor : OrderItem?
-    //    var uuid : UUID?
-    var modifiers : [OrderItem]?
-    let name : String
     
-    init(name: String, isModifierFor: OrderItem?) {
+    //    var uuid : UUID?
+    var modifiers : [Modifier]?
+    let uuid : String
+    let name : String
+    var stackView = UIStackView()
+    
+    
+    init(name: String, uuid : String = UUID().uuidString) {
         self.name = name
-        self.isModifierFor = isModifierFor
+        
+        self.uuid = uuid
+    }
+}
+extension OrderItem: Equatable {
+    static func == (lhs: OrderItem, rhs: OrderItem) -> Bool {
+        
+        return lhs.uuid == rhs.uuid
+            && lhs.name == rhs.name
+            && lhs.modifiers == rhs.modifiers
+        
     }
 }

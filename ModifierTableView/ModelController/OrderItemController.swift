@@ -16,11 +16,16 @@ class OrderItemController{
     var currentOrderItem : OrderItem?
     
     
-    func createOrderItem(name: String, isModifierFor: OrderItem?){
+    func createOrderItem(name: String){
         
-        let newOrderItem = OrderItem(name: name, isModifierFor: isModifierFor)
+        let newOrderItem = OrderItem(name: name)
         
         orders.append(newOrderItem)
         currentOrderItem = newOrderItem
     }
+    
+    func addModifierViews(order: OrderItem){
+        
+    }
+    
 }

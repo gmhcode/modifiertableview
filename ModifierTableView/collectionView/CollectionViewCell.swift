@@ -11,6 +11,8 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var itemLabel: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
+    
     
     
     var orderItem : OrderItem?{
@@ -19,8 +21,29 @@ class CollectionViewCell: UICollectionViewCell {
         }
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
     func setViews(){
         itemLabel.text = orderItem?.name
+        
+    }
+    
+    
+    
+    
+    
+    @IBAction func reloadTapped(_ sender: Any) {
+        
+        OrderItemController.shared.orders.append(OrderItem(name: "as"))
+        
+        let view = self.superview as? UICollectionView
+        view?.reloadData()
     }
     
     
