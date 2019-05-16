@@ -18,6 +18,7 @@
 		903F0C6D228C6E98003D83D1 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903F0C6C228C6E98003D83D1 /* Modifier.swift */; };
 		903F0C71228C7591003D83D1 /* ViewControllerWithTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903F0C70228C7591003D83D1 /* ViewControllerWithTable.swift */; };
 		903F0C73228C75F9003D83D1 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903F0C72228C75F9003D83D1 /* TableViewCell.swift */; };
+		90EBECBF228CE3750079B237 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBECBE228CE3750079B237 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		903F0C6C228C6E98003D83D1 /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
 		903F0C70228C7591003D83D1 /* ViewControllerWithTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithTable.swift; sourceTree = "<group>"; };
 		903F0C72228C75F9003D83D1 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		90EBECBE228CE3750079B237 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				903F0C6A228B85EB003D83D1 /* Model */,
 				903F0C69228B85E3003D83D1 /* ModelController */,
 				903F0C52228B6DD7003D83D1 /* Assets.xcassets */,
+				90EBECC0228CE37C0079B237 /* Extensions */,
 				903F0C74228C8BEE003D83D1 /* collectionView */,
 				903F0C54228B6DD7003D83D1 /* LaunchScreen.storyboard */,
 				903F0C57228B6DD7003D83D1 /* Info.plist */,
@@ -112,6 +115,14 @@
 				903F0C63228B824E003D83D1 /* CollectionViewCell.swift */,
 			);
 			path = collectionView;
+			sourceTree = "<group>";
+		};
+		90EBECC0228CE37C0079B237 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				90EBECBE228CE3750079B237 /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				903F0C68228B8305003D83D1 /* OrderItemController.swift in Sources */,
+				90EBECBF228CE3750079B237 /* Extensions.swift in Sources */,
 				903F0C73228C75F9003D83D1 /* TableViewCell.swift in Sources */,
 				903F0C4E228B6DD6003D83D1 /* ViewController.swift in Sources */,
 				903F0C71228C7591003D83D1 /* ViewControllerWithTable.swift in Sources */,

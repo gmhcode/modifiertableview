@@ -16,13 +16,15 @@ class OrderItem{
     let uuid : String
     let name : String
     
-    var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 10
-        return stackView
-    }()
+    var stackView: UIStackView?
+        
+//        = {
+//        let stackView = UIStackView()
+//        stackView.axis = .horizontal
+//        stackView.distribution = .fillEqually
+//        stackView.spacing = 10
+//        return stackView
+//    }()
     
     
     init(name: String, uuid : String = UUID().uuidString) {

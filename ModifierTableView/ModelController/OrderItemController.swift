@@ -25,6 +25,12 @@ class OrderItemController{
     }
     
     func addModifierView(order: OrderItem) {
+        
+        order.stackView = UIStackView()
+        order.stackView?.axis = .horizontal
+        order.stackView?.distribution = .fillEqually
+        order.stackView?.spacing = 10
+        
 //        var one = 1
 //        for i in order.stackView.arrangedSubviews{
 //            if one == 1 {
@@ -38,20 +44,38 @@ class OrderItemController{
         
         guard let modifiers = order.modifiers else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
         
+//        let newLabel: UILabel = {
+//
+//            let label = UILabel()
+//            label.text = modifiers[modifiers.count - 1].name
+//            label.layer.frame.size.height = 10
+//            label.textAlignment = .center
+//            return label
+//
+//        }()
+        
+        
+        //            print("🈸\(stackView.subviews.count)")
+        
+        print("🏧🈸\(modifiers)")
+        //            stackView.addArrangedSubview(newLabel)
+        //        }
         
         
         for i in modifiers {
             
         guard let index = modifiers.firstIndex(of: i) else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
-            
+
         let newLabel: UILabel = {
-            
+
             let label = UILabel()
-            label.text = modifiers[index].name
+            label.text = modifiers[modifiers.count - 1].name
+            label.layer.frame.size.height = 10
+            label.textAlignment = .center
             return label
         }()
-        
-        order.stackView.addArrangedSubview(newLabel)
+            order.stackView?.axis = .vertical
+            order.stackView?.addArrangedSubview(newLabel)
         }
         
     } 

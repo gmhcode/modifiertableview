@@ -11,16 +11,17 @@ import UIKit
 class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var itemLabel: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
+//    @IBOutlet weak var stackView: UIStackView!
     
     
+    @IBOutlet weak var reloadButton: UIButton!
     
     var orderItem : OrderItem?{
         didSet {
             setViews()
         }
     }
-    
+    var stackView : UIStackView?
     
     
     func setViews(){
@@ -35,23 +36,50 @@ class TableViewCell: UITableViewCell {
 //        stackView = orderItem.stackView
         
 //        growStackView()
+//        removeViews(stackView: stackView)
+//        if orderItem?.modifiers != nil {
+//            setStack()
+//        }
+        
+        print("⚡️\(orderItem?.stackView?.arrangedSubviews.count)" + "\(orderItem?.name)")
+        
         
     }
     
     
     
-    func removeViews(stackView: UIStackView){
+    func removeViews(){
         
         var index = 0
+//        for i in self.subviews {
+//            if i == itemLabel {
+//                continue
+//            }
+//            else {
+//
+//                stackView?.removeFromSuperview()
+//            }
+//        }
         
-        for i in stackView.arrangedSubviews {
-            if index >= 3 {
-                stackView.removeArrangedSubview(i)
-            }
-            index += 1
-        }
+        
+        
+
     }
     
+    func setStack(){
+        removeViews()
+        guard let orderItem = orderItem, let stackView = stackView else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return }
+        
+//        OrderItemController.shared.addModifierView(order: orderItem)
+        self.addSubview(stackView)
+        
+        
+        
+        stackView.anchor(top: self.safeAreaLayoutGuide.topAnchor, bottom: nil, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 77, paddingBottom:  -8, paddingLeft: 8, paddingRight: -8, width: nil, height: nil)
+//        stackView = orderItem.stackView
+    }
+    
+//    allStackView.anchor(top: self.safeAreaLayoutGuide.topAnchor, bottom: self.safeAreaLayoutGuide.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingBottom: -8, paddingLeft: 8, paddingRight: -8, width: nil, height: nil)
     
     
     func growStackView(){
@@ -59,12 +87,12 @@ class TableViewCell: UITableViewCell {
         guard let modifiers = orderItem?.modifiers else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
 
 
-        if modifiers.count > (stackView.subviews.count - 3){
+//        if modifiers.count > (stackView.subviews.count - 3){
 
             let newLabel: UILabel = {
 
                 let label = UILabel()
-                label.text = modifiers[modifiers.count - 1].name
+                label.text = modifiers[modifiers.count].name
                 label.layer.frame.size.height = 10
                 label.textAlignment = .center
                 return label
@@ -72,12 +100,12 @@ class TableViewCell: UITableViewCell {
             }()
 
 
-            print("🈸\(stackView.subviews.count)")
+//            print("🈸\(stackView.subviews.count)")
 
             print("🏧🈸\(modifiers)")
-            stackView.addArrangedSubview(newLabel)
-        }
-        
+//            stackView.addArrangedSubview(newLabel)
+//        }
+    
         
 
 //        if modifiers.count > (stackView.subviews.count - 3){
@@ -103,7 +131,19 @@ class TableViewCell: UITableViewCell {
 //    }
     }
     
-    
+    override func prepareForReuse() {
+        guard let views = stackView?.arrangedSubviews else {print("❇️♊️>>>\(#file) \(#line): guard let failed<<<"); return}
+
+
+        for i in views {
+
+            stackView?.removeArrangedSubview(i)
+
+        }
+        stackView?.removeFromSuperview()
+//        stackView = nil
+
+    }
     
     
     @IBAction func reloadTapped(_ sender: Any) {

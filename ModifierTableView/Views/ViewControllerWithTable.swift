@@ -80,11 +80,24 @@ extension ViewControllerWithTable: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! TableViewCell
         
         
-       
         
+        
+        
+//        if cell.orderItem?.modifiers == nil {
+////            cell.removeViews(stackView: cell.orderItem!.stackView)
+////            cell.orderItem?.stackView.subviews.forEach({cell.removeViews(stackView:$0)})
+//            cell.removeFromSuperview()
+////            cell.setStack()
+//        } else {
+        
+        
+        OrderItemController.shared.addModifierView(order: orders[indexPath.row])
         cell.orderItem = orders[indexPath.row]
+        cell.stackView = orders[indexPath.row].stackView
+        cell.setStack()
+        print("🚀\(cell.subviews.count)")
+        print("🚀\(cell.subviews)")
         
-        cell.growStackView()
         
 //        OrderItemController.shared.addModifierView(order: orders[indexPath.row])
         
@@ -95,7 +108,7 @@ extension ViewControllerWithTable: UITableViewDelegate, UITableViewDataSource
 //        cell.stackView = orders[indexPath.row].stackView
         
         
-        let stackHeight = defaultCellHeight + cell.stackView.frame.height
+        let stackHeight = defaultCellHeight + (cell.orderItem?.stackView?.frame.height)!
 //        print("❇️🆔\(stackHeight)")
         
         cellSizes = stackHeight
@@ -115,8 +128,8 @@ extension ViewControllerWithTable: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         
-        return cellSizes ?? 0
-//        return 1000
+//        return cellSizes ?? 0
+        return 1000
     }
     
 //    func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
