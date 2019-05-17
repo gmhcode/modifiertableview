@@ -20,30 +20,44 @@ class OrderItemController{
         
         let newOrderItem = OrderItem(name: name)
         
+        newOrderItem.stackView = UIStackView()
+        newOrderItem.stackView?.axis = .vertical
+        newOrderItem.stackView?.distribution = .fillEqually
+        newOrderItem.stackView?.spacing = 10
+        
         orders.append(newOrderItem)
         currentOrderItem = newOrderItem
     }
     
     func addModifierView(order: OrderItem) {
+
         
-        order.stackView = UIStackView()
-        order.stackView?.axis = .horizontal
-        order.stackView?.distribution = .fillEqually
-        order.stackView?.spacing = 10
-        
-//        var one = 1
-//        for i in order.stackView.arrangedSubviews{
-//            if one == 1 {
-//                one += 1
-//                continue
-//            } else{
-//                order.stackView.removeArrangedSubview(i)
-//
-//            }
-//        }
         
         guard let modifiers = order.modifiers else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
         
+//        print("🏧🈸\(modifiers)")
+   
+        
+        let newLabel: UILabel = {
+            
+            let label = UILabel()
+            label.text = modifiers[modifiers.count - 1].name
+            label.layer.frame.size.height = 10
+            label.textAlignment = .center
+            return label
+        }()
+//        print("✅pre\(order.stackView?.arrangedSubviews.count)")
+        order.stackView?.addArrangedSubview(newLabel)
+        
+//        print("✅count\(order.stackView?.arrangedSubviews.count)")
+        
+        
+//        for i in modifiers {
+//
+//        guard let index = modifiers.firstIndex(of: i) else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
+//
+//
+//
 //        let newLabel: UILabel = {
 //
 //            let label = UILabel()
@@ -51,32 +65,19 @@ class OrderItemController{
 //            label.layer.frame.size.height = 10
 //            label.textAlignment = .center
 //            return label
-//
 //        }()
-        
-        
-        //            print("🈸\(stackView.subviews.count)")
-        
-        print("🏧🈸\(modifiers)")
-        //            stackView.addArrangedSubview(newLabel)
-        //        }
-        
-        
-        for i in modifiers {
-            
-        guard let index = modifiers.firstIndex(of: i) else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
+//            order.stackView?.addArrangedSubview(newLabel)
+////            print("🚀height\(order.stackView?.bounds.height)")
+//        }
+    }
+}
 
-        let newLabel: UILabel = {
 
-            let label = UILabel()
-            label.text = modifiers[modifiers.count - 1].name
-            label.layer.frame.size.height = 10
-            label.textAlignment = .center
-            return label
-        }()
-            order.stackView?.axis = .vertical
-            order.stackView?.addArrangedSubview(newLabel)
-        }
-        
-    } 
+
+extension OrderItemController {
+    
+    
+    
+    
+    
 }

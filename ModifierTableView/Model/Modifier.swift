@@ -8,30 +8,26 @@
 
 import UIKit
 
-class Modifier {
+class Modifier: OrderItem {
     
-    var name : String
-    var isModifierForOrder : OrderItem?
-    var isModifierForModifier : Modifier?
-    var modifiers : [Modifier] = []
-    var uuid : String
     
-    init(name: String, isModifierForOrder: OrderItem?, isModifierForModifier : Modifier?, uuid : String = UUID().uuidString ) {
-        self.name = name
-        self.isModifierForOrder = isModifierForOrder
-        self.isModifierForModifier = isModifierForModifier
-        self.uuid = uuid
+    var isModifierFor : OrderItem?
+    
+    
+    init(name: String, isModifierFor: OrderItem?, uuid : String = UUID().uuidString ) {
+        self.isModifierFor = isModifierFor
+        super.init(name: name)
     }
     
     
 }
 
-extension Modifier: Equatable {
-    static func == (lhs: Modifier, rhs: Modifier) -> Bool {
-        
-        return lhs.uuid == rhs.uuid && lhs.name == rhs.name
-            && lhs.isModifierForOrder == rhs.isModifierForOrder
-            && lhs.isModifierForModifier == rhs.isModifierForModifier
-            && lhs.modifiers == rhs.modifiers
-    }
-}
+//extension Modifier: Equatable {
+//    static func == (lhs: Modifier, rhs: Modifier) -> Bool {
+//
+//        return lhs.uuid == rhs.uuid && lhs.name == rhs.name
+//            && lhs.isModifierForOrder == rhs.isModifierForOrder
+//            && lhs.isModifierForModifier == rhs.isModifierForModifier
+//            && lhs.modifiers == rhs.modifiers
+//    }
+//}

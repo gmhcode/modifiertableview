@@ -24,24 +24,22 @@ class TableViewCell: UITableViewCell {
     var stackView : UIStackView?
     
     
+    
+    var cellSize = 0
+    
+    
+    
+    
+    
+    
+    
+    
     func setViews(){
-        print("🅰️\(String(describing: orderItem?.modifiers))")
+//        print("🅰️\(String(describing: orderItem?.modifiers))")
         
         itemLabel.text = orderItem?.name
-//        guard let orderItem = orderItem else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
-        
-        
-//        orderItem.stackView = stackView
-//        OrderItemController.shared.addModifierView(order: orderItem)
-//        stackView = orderItem.stackView
-        
-//        growStackView()
-//        removeViews(stackView: stackView)
-//        if orderItem?.modifiers != nil {
-//            setStack()
-//        }
-        
-        print("⚡️\(orderItem?.stackView?.arrangedSubviews.count)" + "\(orderItem?.name)")
+
+//        print("⚡️\(orderItem?.stackView?.arrangedSubviews.count)" + "\(orderItem?.name)")
         
         
     }
@@ -61,25 +59,39 @@ class TableViewCell: UITableViewCell {
 //            }
 //        }
         
-        
-        
-
     }
     
     func setStack(){
         removeViews()
         guard let orderItem = orderItem, let stackView = stackView else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return }
         
-//        OrderItemController.shared.addModifierView(order: orderItem)
+        
+        
         self.addSubview(stackView)
         
         
-        
         stackView.anchor(top: self.safeAreaLayoutGuide.topAnchor, bottom: nil, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 77, paddingBottom:  -8, paddingLeft: 8, paddingRight: -8, width: nil, height: nil)
-//        stackView = orderItem.stackView
+        
+        
+        
+        if orderItem.modifiers != nil {
+            for i in orderItem.modifiers!{
+                
+                let newLabel: UILabel = {
+                    
+                    let label = UILabel()
+                    label.text = i.name
+                    label.layer.frame.size.height = 10
+                    label.textAlignment = .center
+                    return label
+                    
+                }()
+                stackView.addArrangedSubview(newLabel)
+                
+            }
+        }
     }
-    
-//    allStackView.anchor(top: self.safeAreaLayoutGuide.topAnchor, bottom: self.safeAreaLayoutGuide.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingBottom: -8, paddingLeft: 8, paddingRight: -8, width: nil, height: nil)
+
     
     
     func growStackView(){
@@ -87,7 +99,6 @@ class TableViewCell: UITableViewCell {
         guard let modifiers = orderItem?.modifiers else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
 
 
-//        if modifiers.count > (stackView.subviews.count - 3){
 
             let newLabel: UILabel = {
 
@@ -98,37 +109,6 @@ class TableViewCell: UITableViewCell {
                 return label
 
             }()
-
-
-//            print("🈸\(stackView.subviews.count)")
-
-            print("🏧🈸\(modifiers)")
-//            stackView.addArrangedSubview(newLabel)
-//        }
-    
-        
-
-//        if modifiers.count > (stackView.subviews.count - 3){
-//        removeViews(stackView: stackView)
-//        for (index,i) in modifiers.enumerated(){
-//            guard let index = modifiers.firstIndex(of:i) else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); continue}
-//
-//            let newLabel: UILabel = {
-//
-//                let label = UILabel()
-//                label.text = modifiers[index].name
-//                label.layer.frame.size.height = 10
-//                return label
-//
-//
-//            }()
-//
-//
-//            print("🈸\(stackView.subviews.count)")
-//            print("🏧🈸\(stackView.layer.frame )")
-//            stackView.addArrangedSubview(newLabel)
-//      }
-//    }
     }
     
     override func prepareForReuse() {
@@ -138,20 +118,32 @@ class TableViewCell: UITableViewCell {
         for i in views {
 
             stackView?.removeArrangedSubview(i)
-
+            
+            i.removeFromSuperview()
+            
         }
+        orderItem?.stackView?.removeFromSuperview()
         stackView?.removeFromSuperview()
-//        stackView = nil
 
     }
     
     
     @IBAction func reloadTapped(_ sender: Any) {
         
-        OrderItemController.shared.orders.append(OrderItem(name: "as"))
+        #warning("Find a way to change this rows height from inside the cell")
         
-        let view = self.superview as? UITableView
+        let newLabel: UILabel = {
+            
+            let label = UILabel()
+            label.text = "derp"
+            label.layer.frame.size.height = 10
+            label.textAlignment = .center
+            return label
+            
+        }()
+        stackView?.addArrangedSubview(newLabel)
         
-        view?.reloadData()
+        self.layer.frame.size.height += 10
+
     }
 }

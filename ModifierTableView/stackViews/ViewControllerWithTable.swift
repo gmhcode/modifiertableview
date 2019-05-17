@@ -49,7 +49,7 @@ class ViewControllerWithTable: UIViewController {
     
     @IBAction func addModifierButtonTapped(_ sender: Any) {
         
-        let modifier = Modifier(name: "modifier \(String(describing: selectedOrder?.modifiers?.count))", isModifierForOrder: selectedOrder, isModifierForModifier: nil)
+        let modifier = Modifier(name: "modifier \(String(describing: selectedOrder?.modifiers?.count))", isModifierFor: selectedOrder)
         
         if selectedOrder?.modifiers == nil {
             selectedOrder?.modifiers = [modifier]
@@ -57,10 +57,14 @@ class ViewControllerWithTable: UIViewController {
             selectedOrder?.modifiers?.append(modifier)
         }
         
-        
-        print("👨‍💼\(String(describing: selectedOrder?.modifiers))")
-        tableView.reloadData()
-        //        selectedOrder?.modifiers?.append(OrderItem(name: "modifier \(String(describing: selectedOrder?.modifiers?.count))", isModifierFor: selectedOrder))
+        if selectedOrder != nil {
+            OrderItemController.shared.addModifierView(order: selectedOrder!)
+            print("👨‍💼modifiers\(String(describing: selectedOrder?.modifiers))")
+//             print("👨‍💼views\(selectedOrder?.stackView?.arrangedSubviews.count)")
+        }
+        print("👨‍💼views\(String(describing: selectedOrder?.stackView?.arrangedSubviews.count))")
+//        print("👨‍💼\(String(describing: selectedOrder?.modifiers))")
+//        tableView.reloadData()
     }
 }
 
@@ -78,44 +82,36 @@ extension ViewControllerWithTable: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! TableViewCell
+        cell.stackView?.layoutIfNeeded()
         
         
-        
-        
-        
-//        if cell.orderItem?.modifiers == nil {
-////            cell.removeViews(stackView: cell.orderItem!.stackView)
-////            cell.orderItem?.stackView.subviews.forEach({cell.removeViews(stackView:$0)})
-//            cell.removeFromSuperview()
-////            cell.setStack()
-//        } else {
-        
-        
-        OrderItemController.shared.addModifierView(order: orders[indexPath.row])
-        cell.orderItem = orders[indexPath.row]
-        cell.stackView = orders[indexPath.row].stackView
-        cell.setStack()
-        print("🚀\(cell.subviews.count)")
-        print("🚀\(cell.subviews)")
-        
+        print("🔴stack views\(String(describing: selectedOrder?.stackView?.arrangedSubviews.count))")
         
 //        OrderItemController.shared.addModifierView(order: orders[indexPath.row])
+        cell.orderItem = orders[indexPath.row]
+        cell.stackView = orders[indexPath.row].stackView
+//        print("👨‍💼views\(selectedOrder?.stackView?.arrangedSubviews)")
+//        print("🔴stack views\(selectedOrder?.stackView?.arrangedSubviews)")
+        cell.setStack()
+        
+        
+        print("❇️🆔stackheight\(String(describing: cell.stackView?.frame.height))")
         
         
         
-//        THIS FUCKS IT UP
-//        orders[indexPath.row].stackView = cell.stackView
-//        cell.stackView = orders[indexPath.row].stackView
+//        print("🚀\(cell.subviews.count)")
+//        print("🚀\(cell.subviews)")
         
-        
-        let stackHeight = defaultCellHeight + (cell.orderItem?.stackView?.frame.height)!
-//        print("❇️🆔\(stackHeight)")
-        
-        cellSizes = stackHeight
         
 
         
+        let stackHeight = defaultCellHeight + (cell.stackView?.frame.height)!
+//        print("❇️🆔stackheight\(stackHeight)")
         
+        cellSizes = stackHeight
+        
+        cell.stackView?.setNeedsLayout()
+//        cell.setNeedsLayout()
         return cell
     }
     
@@ -128,8 +124,8 @@ extension ViewControllerWithTable: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         
-//        return cellSizes ?? 0
-        return 1000
+        return cellSizes ?? 0
+//        return 1000
     }
     
 //    func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {

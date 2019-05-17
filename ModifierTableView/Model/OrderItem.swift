@@ -15,6 +15,7 @@ class OrderItem{
     var modifiers : [Modifier]?
     let uuid : String
     let name : String
+    var text : String = ""
     
     var stackView: UIStackView?
         
