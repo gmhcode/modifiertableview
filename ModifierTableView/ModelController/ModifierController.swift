@@ -17,56 +17,7 @@ class ModifierController {
     
     var allMods : [Modifier] = []
     
-    
-    
-//    func addModifier(to order: OrderItem, modifier2: [Modifier]){
-//
-//        if order.modifiers == nil {
-//            order.modifiers = modifier2
-//        } else {
-//            order.modifiers?.append(contentsOf: modifier2)
-//        }
-//
-//
-//
-//    }
-    
-    func createModifierFor(order: OrderItem?, name: String) -> Modifier?{
-        
-        guard let order = order else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return nil }
-        
-        let modifier = Modifier(name: "Modifier For \(String(describing: order.name)) " + name + "\n", isModifierFor: order, mainOrder: order)
-        
-        if order.modifiers == nil {
-            order.modifiers = [modifier]
-        } else {
-            order.modifiers?.append(modifier)
-        }
-        
-        return modifier
-        
-    }
-    
-    func addModifierToOrder(modifier: Modifier, to order: OrderItem){
-        
-        if order.modifiers == nil {
-            order.modifiers = [modifier]
-        } else {
-            order.modifiers?.append(modifier)
-        }
-    }
-    
-    func addModifierToModifier(modifier: Modifier, toModifier: Modifier, mainOrder: OrderItem){
-        
-        if toModifier.modifiers == nil {
-            toModifier.modifiers = [modifier]
-            mainOrder.modifiers?.append(modifier)
-        } else {
-            toModifier.modifiers?.append(modifier)
-            mainOrder.modifiers?.append(modifier)
-        }
-    }
-    
+
     
     
     

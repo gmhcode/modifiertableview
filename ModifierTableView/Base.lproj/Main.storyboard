@@ -297,7 +297,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.51589527499710475" blue="0.50048333994087901" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="modifier2 has mods">
+                                <state key="normal" title="potatoMod">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -309,7 +309,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.97456150940394748" blue="0.47522501518298543" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <state key="normal" title="modOfmod2">
+                                <state key="normal" title="mainMod">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -320,7 +320,7 @@
                                 <rect key="frame" x="570" y="798" width="152" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.4101316173688449" green="0.74496033031088082" blue="0.36747093226152766" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="modofmod3"/>
+                                <state key="normal" title="bakedMod"/>
                                 <connections>
                                     <action selector="bakedButtonTapped:" destination="7X2-ZH-mJb" eventType="touchUpInside" id="VA8-NM-kx1"/>
                                 </connections>

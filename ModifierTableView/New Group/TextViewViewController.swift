@@ -41,23 +41,14 @@ class TextViewViewController: UIViewController {
         
         potato = Modifier(name: "potato", isModifierFor: steak, mainOrder: steak)
         cheese = Modifier(name: "cheese", isModifierFor: potato!, mainOrder: steak)
-        baked = Modifier(name: "baked", isModifierFor: potato!, mainOrder: steak)
-        burned = Modifier(name: "burned", isModifierFor: cheese!, mainOrder: steak)
+        baked = Modifier(name: "baked", isModifierFor: cheese!, mainOrder: steak)
+        burned = Modifier(name: "burned", isModifierFor: baked!, mainOrder: steak)
         
         
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
+  
     
     @IBAction func newOrderButtonTapped(_ sender: Any) {
         
@@ -68,8 +59,8 @@ class TextViewViewController: UIViewController {
         let food = OrderItem(name: "food \(orders.count)")
         potato = Modifier(name: "potato", isModifierFor: food, mainOrder: food, uuid: potato!.uuid)
         cheese = Modifier(name: "cheese", isModifierFor: potato!, mainOrder: food, uuid: cheese!.uuid)
-        baked = Modifier(name: "baked", isModifierFor: potato!, mainOrder: food, uuid: baked!.uuid)
-        burned = Modifier(name: "burned", isModifierFor: cheese!, mainOrder: food, uuid: burned!.uuid)
+        baked = Modifier(name: "baked", isModifierFor: cheese!, mainOrder: food, uuid: baked!.uuid)
+        burned = Modifier(name: "burned", isModifierFor: baked!, mainOrder: food, uuid: burned!.uuid)
 
         
         orders = [food]
@@ -101,7 +92,7 @@ class TextViewViewController: UIViewController {
         guard let selectedOrder = selectedOrder else {print("❇️♊️>>>\(#file) \(#line): guard let failed<<<"); return}
         
         
-        var potato3 = Modifier(name: "fries", isModifierFor: selectedOrder, mainOrder: selectedOrder)
+        var potato3 = Modifier(name: "fries", isModifierFor: selectedOrder, mainOrder: selectedOrder, uuid: selectedOrder.uuid)
         
 //        ModifierController.shared.sortMods(order: selectedOrder)
         tableView.reloadData()
@@ -114,13 +105,20 @@ class TextViewViewController: UIViewController {
         guard let selectedOrder = selectedOrder else {print("❇️♊️>>>\(#file) \(#line): guard let failed<<<"); return}
         
         
-        var potato4 = Modifier(name: "fries", isModifierFor: cheese!, mainOrder: selectedOrder)
+        var potato4 = Modifier(name: "fries", isModifierFor: cheese!, mainOrder: selectedOrder, uuid: cheese!.uuid)
         
 //        ModifierController.shared.sortMods(order: selectedOrder)
         tableView.reloadData()
     }
     
     @IBAction func bakedButtonTapped(_ sender: Any) {
+        guard let selectedOrder = selectedOrder else {print("❇️♊️>>>\(#file) \(#line): guard let failed<<<"); return}
+        
+        
+        var potato4 = Modifier(name: "beans", isModifierFor: baked!, mainOrder: selectedOrder, uuid: baked!.uuid)
+        
+        //        ModifierController.shared.sortMods(order: selectedOrder)
+        tableView.reloadData()
         
     }
 }
