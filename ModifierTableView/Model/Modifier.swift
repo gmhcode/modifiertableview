@@ -11,15 +11,30 @@ import UIKit
 class Modifier: OrderItem {
     
     
-    var isModifierFor : OrderItem?
+    var isModifierFor : OrderItem
+    var mainOrder : OrderItem
     
-    
-    init(name: String, isModifierFor: OrderItem?, uuid : String = UUID().uuidString ) {
+    init(name: String, isModifierFor: OrderItem, mainOrder: OrderItem, uuid : String = UUID().uuidString )
+    {
         self.isModifierFor = isModifierFor
+        self.mainOrder = mainOrder
         super.init(name: name)
+        self.uuid = uuid
+        
+        self.text = "\(name) is modifier for \(String(describing: isModifierFor.name))"
+        
+        
+        if isModifierFor != mainOrder {
+            isModifierFor.modifiers?.append(self)
+        }
+        
+        if mainOrder.modifiers == nil {
+            mainOrder.modifiers = [self]
+        } else {
+            mainOrder.modifiers?.append(self)
+        }
+        
     }
-    
-    
 }
 
 //extension Modifier: Equatable {
@@ -29,5 +44,11 @@ class Modifier: OrderItem {
 //            && lhs.isModifierForOrder == rhs.isModifierForOrder
 //            && lhs.isModifierForModifier == rhs.isModifierForModifier
 //            && lhs.modifiers == rhs.modifiers
+//    }
+//}
+//extension Modifier: Hashable
+//{
+//    var hashValue: Int {
+//        return uuid.hashValue
 //    }
 //}

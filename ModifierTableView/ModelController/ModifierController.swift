@@ -15,6 +15,7 @@ class ModifierController {
     
     var currentModifier : Modifier?
     
+    var allMods : [Modifier] = []
     
     
     
@@ -34,7 +35,7 @@ class ModifierController {
         
         guard let order = order else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return nil }
         
-        let modifier = Modifier(name: "Modifier For \(String(describing: order.name)) " + name + "\n", isModifierFor: order)
+        let modifier = Modifier(name: "Modifier For \(String(describing: order.name)) " + name + "\n", isModifierFor: order, mainOrder: order)
         
         if order.modifiers == nil {
             order.modifiers = [modifier]
@@ -46,22 +47,75 @@ class ModifierController {
         
     }
     
+    func addModifierToOrder(modifier: Modifier, to order: OrderItem){
+        
+        if order.modifiers == nil {
+            order.modifiers = [modifier]
+        } else {
+            order.modifiers?.append(modifier)
+        }
+    }
+    
+    func addModifierToModifier(modifier: Modifier, toModifier: Modifier, mainOrder: OrderItem){
+        
+        if toModifier.modifiers == nil {
+            toModifier.modifiers = [modifier]
+            mainOrder.modifiers?.append(modifier)
+        } else {
+            toModifier.modifiers?.append(modifier)
+            mainOrder.modifiers?.append(modifier)
+        }
+    }
     
     
     
     
-    func addModifierText(for order: OrderItem){
+    func sortMods(order: OrderItem){
+        
+        guard let modifiers = order.modifiers else {print("❇️♊️>>>\(#file) \(#line): guard let failed<<<"); return}
+
+        
+        var pocket : [OrderItem] = []
+        
+        
+        for i in modifiers{
+             let modOrder = i.isModifierFor
+//            print("⚡️\(modOrder.name)")
+            if pocket.contains(modOrder){
+                continue
+            }else{
+                pocket.append(modOrder)
+            }
+        }
+     
+
+        var pocket2 : [Modifier] = []
+        
+        for i in pocket{
+            
+            pocket2.append(contentsOf: modifiers.filter({$0.isModifierFor == i}))
+            
+        }
+        pocket2.forEach({print("🌸name: \($0.isModifierFor.name) : uuid \($0.isModifierFor.uuid)")})
+        order.modifiers = pocket2
+//        print("🌸\(pocket2)")
+        
+        
+    }
+    
+    
+    
+    func constructText(for order: OrderItem){
         
         guard let modifiers = order.modifiers else {print("🔥❇️>>>\(#file) \(#line): guard ket failed<<<"); return  }
         
-        let max = modifiers.count
         
         
         var modifierText = ""
         
         for i in modifiers {
             
-            modifierText.append(i.name + "\n")
+            modifierText.append(i.text + "\n")
             
             
         }
@@ -75,13 +129,7 @@ class ModifierController {
     
     
     
-    func constructText(modifiers: [Modifier]) -> String
-    {
-        
-        
-        
-        return String()
-    }
+    
     
     
     

@@ -48,21 +48,24 @@ class ViewControllerWithTable: UIViewController {
     }
     
     @IBAction func addModifierButtonTapped(_ sender: Any) {
+        guard let selectedOrder = selectedOrder else {print("❇️♊️>>>\(#file) \(#line): guard let failed<<<"); return}
+
         
-        let modifier = Modifier(name: "modifier \(String(describing: selectedOrder?.modifiers?.count))", isModifierFor: selectedOrder)
         
-        if selectedOrder?.modifiers == nil {
-            selectedOrder?.modifiers = [modifier]
+        let modifier = Modifier(name: "modifier \(String(describing: selectedOrder.modifiers?.count))", isModifierFor: selectedOrder, mainOrder: selectedOrder)
+        
+        if selectedOrder.modifiers == nil {
+            selectedOrder.modifiers = [modifier]
         } else {
-            selectedOrder?.modifiers?.append(modifier)
+            selectedOrder.modifiers?.append(modifier)
         }
         
         if selectedOrder != nil {
-            OrderItemController.shared.addModifierView(order: selectedOrder!)
-            print("👨‍💼modifiers\(String(describing: selectedOrder?.modifiers))")
+            OrderItemController.shared.addModifierView(order: selectedOrder)
+            print("👨‍💼modifiers\(String(describing: selectedOrder.modifiers))")
 //             print("👨‍💼views\(selectedOrder?.stackView?.arrangedSubviews.count)")
         }
-        print("👨‍💼views\(String(describing: selectedOrder?.stackView?.arrangedSubviews.count))")
+        print("👨‍💼views\(String(describing: selectedOrder.stackView?.arrangedSubviews.count))")
 //        print("👨‍💼\(String(describing: selectedOrder?.modifiers))")
 //        tableView.reloadData()
     }

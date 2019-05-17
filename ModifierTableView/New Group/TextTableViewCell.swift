@@ -22,8 +22,8 @@ class TextTableViewCell: UITableViewCell {
     
     
     func setViews(){
-        
-        ModifierController.shared.addModifierText(for: orderItem!)
+        ModifierController.shared.sortMods(order: orderItem!)
+        ModifierController.shared.constructText(for: orderItem!)
         
         
         

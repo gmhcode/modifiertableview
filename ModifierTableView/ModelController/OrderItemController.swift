@@ -29,6 +29,8 @@ class OrderItemController{
         currentOrderItem = newOrderItem
     }
     
+    
+    
     func addModifierView(order: OrderItem) {
 
         
@@ -72,12 +74,3 @@ class OrderItemController{
     }
 }
 
-
-
-extension OrderItemController {
-    
-    
-    
-    
-    
-}

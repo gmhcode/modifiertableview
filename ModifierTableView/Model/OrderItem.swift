@@ -13,21 +13,12 @@ class OrderItem{
     
     //    var uuid : UUID?
     var modifiers : [Modifier]?
-    let uuid : String
+    var uuid : String
     let name : String
     var text : String = ""
     
     var stackView: UIStackView?
-        
-//        = {
-//        let stackView = UIStackView()
-//        stackView.axis = .horizontal
-//        stackView.distribution = .fillEqually
-//        stackView.spacing = 10
-//        return stackView
-//    }()
-    
-    
+  
     init(name: String, uuid : String = UUID().uuidString) {
         self.name = name
         self.uuid = uuid
@@ -42,5 +33,11 @@ extension OrderItem: Equatable {
             && lhs.name == rhs.name
             && lhs.modifiers == rhs.modifiers
         
+    }
+}
+extension OrderItem: Hashable
+{
+    var hashValue: Int {
+        return uuid.hashValue
     }
 }

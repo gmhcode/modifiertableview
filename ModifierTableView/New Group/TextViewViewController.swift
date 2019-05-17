@@ -26,12 +26,25 @@ class TextViewViewController: UIViewController {
         }
     }
     
+    var steak = OrderItem(name: "steak")
+    var potato : Modifier?
+    var cheese : Modifier?
+    var baked : Modifier?
+    var burned : Modifier?
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
+        potato = Modifier(name: "potato", isModifierFor: steak, mainOrder: steak)
+        cheese = Modifier(name: "cheese", isModifierFor: potato!, mainOrder: steak)
+        baked = Modifier(name: "baked", isModifierFor: potato!, mainOrder: steak)
+        burned = Modifier(name: "burned", isModifierFor: cheese!, mainOrder: steak)
+        
+        
     }
     
 
@@ -48,17 +61,34 @@ class TextViewViewController: UIViewController {
     
     @IBAction func newOrderButtonTapped(_ sender: Any) {
         
-        OrderItemController.shared.createOrderItem(name: "Order \(orders.count)")
+        
+        
+        
+        
+        let food = OrderItem(name: "food \(orders.count)")
+        potato = Modifier(name: "potato", isModifierFor: food, mainOrder: food, uuid: potato!.uuid)
+        cheese = Modifier(name: "cheese", isModifierFor: potato!, mainOrder: food, uuid: cheese!.uuid)
+        baked = Modifier(name: "baked", isModifierFor: potato!, mainOrder: food, uuid: baked!.uuid)
+        burned = Modifier(name: "burned", isModifierFor: cheese!, mainOrder: food, uuid: burned!.uuid)
+
+        
+        orders = [food]
+        print("❌\(orders)")
+        
         tableView.reloadData()
         
         
     }
     
     @IBAction func newModifierButtonTapped(_ sender: Any) {
+        guard let selectedOrder = selectedOrder else {print("❇️♊️>>>\(#file) \(#line): guard let failed<<<"); return}
+
+        
+        var potato2 = Modifier(name: "super", isModifierFor: potato!, mainOrder: selectedOrder, uuid: potato!.uuid)
         
         
+//        ModifierController.shared.sortMods(order: selectedOrder)
         
-        ModifierController.shared.createModifierFor(order: selectedOrder, name: "meat ")
         
         
         tableView.reloadData()
@@ -68,18 +98,12 @@ class TextViewViewController: UIViewController {
     
     @IBAction func burgerButtonTapped(_ sender: Any) {
         
-        if let modifiers = selectedOrder?.modifiers {
-            
-            let meatMod = modifiers.first(where: {$0.name.contains("meat")})
-            
-           
-            
-            ModifierController.shared.createModifierFor(order: meatMod, name: "burger")
-            print("🔴\(selectedOrder?.modifiers?[0].modifiers)")
-        } else {
-            ModifierController.shared.createModifierFor(order: selectedOrder, name: "burger")
-        }
+        guard let selectedOrder = selectedOrder else {print("❇️♊️>>>\(#file) \(#line): guard let failed<<<"); return}
         
+        
+        var potato3 = Modifier(name: "fries", isModifierFor: selectedOrder, mainOrder: selectedOrder)
+        
+//        ModifierController.shared.sortMods(order: selectedOrder)
         tableView.reloadData()
         
 //         ModifierController.shared.createModifierFor(order: selectedOrder, name: "burger")
@@ -87,18 +111,18 @@ class TextViewViewController: UIViewController {
     
     
     @IBAction func potatoButtonTapped(_ sender: Any) {
+        guard let selectedOrder = selectedOrder else {print("❇️♊️>>>\(#file) \(#line): guard let failed<<<"); return}
+        
+        
+        var potato4 = Modifier(name: "fries", isModifierFor: cheese!, mainOrder: selectedOrder)
+        
+//        ModifierController.shared.sortMods(order: selectedOrder)
+        tableView.reloadData()
     }
     
     @IBAction func bakedButtonTapped(_ sender: Any) {
+        
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 
