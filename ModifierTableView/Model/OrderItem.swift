@@ -32,7 +32,8 @@ extension OrderItem: Equatable {
         return lhs.uuid == rhs.uuid
             && lhs.name == rhs.name
             && lhs.modifiers == rhs.modifiers
-        
+            && lhs.uuid == rhs.uuid
+            && lhs.text == rhs.text
     }
 }
 extension OrderItem: Hashable

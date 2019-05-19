@@ -22,14 +22,23 @@ class TextTableViewCell: UITableViewCell {
     
     
     func setViews(){
-        ModifierController.shared.sortMods(order: orderItem!)
-        ModifierController.shared.constructText(for: orderItem!)
         
         
+//        ModifierController.shared.constructModTextRecursion(modifier: orderItem!)
+        
+        
+        
+        ModifierController.shared.mainItemModRecursion2(modifier: orderItem!)
+        
+        
+//        ModifierController.shared.sortMods(order: orderItem!)
+//        ModifierController.shared.constructText(for: orderItem!)
+//        print("❌\(orderItem?.modifiers?.count)")
         
         
         orderNameLabel.text = orderItem?.name
-        modifierTextView.text = orderItem?.text
+        modifierTextView.text = ModifierController.shared.text.reversed().joined()
+        ModifierController.shared.text = []
            
         adjustUITextViewHeight(arg: modifierTextView)
     }

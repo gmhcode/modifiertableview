@@ -20,35 +20,48 @@ class Modifier: OrderItem {
         self.mainOrder = mainOrder
         super.init(name: name)
         self.uuid = uuid
+//        self.uuid = uuid
         
-        self.text = "\(name) is modifier for \(String(describing: isModifierFor.name))"
+        
+       
+        
+        self.text.append("\n\(name) is modifier for \(String(describing: isModifierFor.name)) \n")
         
         
-        if isModifierFor != mainOrder {
-            isModifierFor.modifiers?.append(self)
-        }
+
+//        print("🔴\(isModifierFor.name)")
         
-        if mainOrder.modifiers == nil {
-            mainOrder.modifiers = [self]
-        } else {
-            mainOrder.modifiers?.append(self)
-        }
+//        print("🆚\(mainOrder.name)")
+        
+//        if isModifierFor.modifiers == nil {
+//            isModifierFor.modifiers = [self]
+//        } else {
+//            isModifierFor.modifiers?.append(self)
+//        }
+        
+        
+//        if isModifierFor == isModifierFor as? Modifier {
+//            if mainOrder.modifiers?.contains(isModifierFor as! Modifier) == false {
+//                mainOrder.modifiers?.append(isModifierFor as! Modifier)
+//            }
+//            
+//        }
+        
+        
+        
+        
+        
         
     }
+    
+    override var modifiers: [Modifier]? {
+        didSet{
+            self.text = ("\n\(name) is modifier for \(String(describing: isModifierFor.name)) \n")
+            self.text.append("""
+                            ***Modifiers***
+            """)
+            
+        }
+    }
+    
 }
-
-//extension Modifier: Equatable {
-//    static func == (lhs: Modifier, rhs: Modifier) -> Bool {
-//
-//        return lhs.uuid == rhs.uuid && lhs.name == rhs.name
-//            && lhs.isModifierForOrder == rhs.isModifierForOrder
-//            && lhs.isModifierForModifier == rhs.isModifierForModifier
-//            && lhs.modifiers == rhs.modifiers
-//    }
-//}
-//extension Modifier: Hashable
-//{
-//    var hashValue: Int {
-//        return uuid.hashValue
-//    }
-//}
