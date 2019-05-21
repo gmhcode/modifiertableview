@@ -29,15 +29,14 @@ class Modifier: OrderItem {
         
         
 
-//        print("🔴\(isModifierFor.name)")
-        
-//        print("🆚\(mainOrder.name)")
-        
+
+//
 //        if isModifierFor.modifiers == nil {
 //            isModifierFor.modifiers = [self]
 //        } else {
 //            isModifierFor.modifiers?.append(self)
 //        }
+        
         
         
 //        if isModifierFor == isModifierFor as? Modifier {

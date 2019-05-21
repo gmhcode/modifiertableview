@@ -12,27 +12,34 @@ class ModifierController {
     
     
     static let shared = ModifierController()
-    
+    var modDictionary: [String : OrderItem] = [:]
     var currentModifier : Modifier? 
     
     var allMods : [Modifier] = []
     
-    
-    
-    
-    
-    
     var text : [String] = []
     
-    var modSections : [Modifier]?
+  
 
     
     func addModifierToOrder(modifier: OrderItem, to order: OrderItem, mainOrder: OrderItem){
         
-        let newMod = Modifier(name: modifier.name, isModifierFor: order, mainOrder: mainOrder, uuid: modifier.uuid)
+        modDictionary[mainOrder.uuid + modifier.uuid] = modifier
+//        ModifierController.shared.addModifierToOrder(modifier: steak2!, to: food, mainOrder: food)
+//
+//
+//        dictionary[food.uuid] = food
+//        dictionary[food.uuid + steak2!.uuid] = steak2
+        
+        
+        
+        
+        
+        
+//        let newMod = Modifier(name: modifier.name, isModifierFor: order, mainOrder: mainOrder, uuid: modifier.uuid)
         
         if order.modifiers == nil {
-            order.modifiers = [modifier] as! [Modifier]
+            order.modifiers = [modifier] as? [Modifier]
         } else {
             order.modifiers?.append(modifier as! Modifier)
         }
@@ -57,9 +64,92 @@ class ModifierController {
     }
     
     
+    
+    func addToMainModArray(order: OrderItem){
+        allMods = []
+        text = [""]
+        
+        if order.modifiers != nil {
+            
+            
+            for i in order.modifiers!{
+                
+                constructModTextRecursion(modifier: i)
+//                constructMods(modifier: i)
+                
+                allMods.append(i)
+            }
+            
+            for i in allMods {
+                text.append(order.text)
+            }
+           
+        }
+//        text.append(order.text)
+    }
+    
+    func constructModTextRecursion(modifier: OrderItem)
+    {
+        
+        text.append(modifier.text)
+        if modifier.modifiers != nil {
+            
+            
+            
+            for i in modifier.modifiers!{
+                
+                constructModTextRecursion(modifier: i)
+                
+            }
+            ////            this is supposed to remove the modifier from its position and put it at the end of the list
+            //            let index = modifier.isModifierFor.modifiers?.firstIndex(of: modifier)
+            ////
+            //                modifier.isModifierFor.modifiers?.remove(at: index!)
+            //                modifier.isModifierFor.modifiers?.insert(modifier, at: 0)
+            //                modifier.isModifierFor.modifiers?.append(modifier)
+            
+            
+            //            if modifier == modifier as? Modifier {
+            //                let mod = modifier as! Modifier
+            //
+            //                if mod.isModifierFor.modifiers?.isEmpty == false {
+            //                    let index = mod.isModifierFor.modifiers?.firstIndex(of: modifier as! Modifier)
+            //                    mod.isModifierFor.modifiers?.remove(at: index!)
+            //                    mod.isModifierFor.modifiers?.insert(modifier as! Modifier, at: 0)
+            //                }
+            //            }
+        }
+    
+//    func constructMods(modifier: Modifier){
+//
+//        var noModMods : [Modifier] = []
+//
+//
+//        if modifier.modifiers != nil {
+//            for i in modifier.modifiers! {
+//
+//                if i.modifiers == nil {
+//
+//                    noModMods.append(i)
+//                    let index = modifier.modifiers?.firstIndex(of: i)
+//                    modifier.modifiers?.remove(at: index!)
+//                    modifier.modifiers?.append(i)
+//                    noModMods = []
+//                }
+//                modifier.modifiers = modifier.modifiers?.reversed()
+//
+////                modifier.modifiers?.append(contentsOf: noModMods)
+//
+//
+//            }
+//        }
+//    }
+    
+    
     func mainItemModRecursion2(modifier: OrderItem)
     
     {
+        text = [""]
         var allMods : [Modifier] = []
         if modifier.modifiers != nil {
             
@@ -87,6 +177,7 @@ class ModifierController {
     
     func mainItemModRecursion(modifier: OrderItem)
     {
+        text = [""]
         if modifier.modifiers != nil {
             
             for i in modifier.modifiers!{
@@ -115,7 +206,7 @@ class ModifierController {
     func constructModTextRecursion(modifier: OrderItem)
     {
         
-        
+        text.append(modifier.text)
         if modifier.modifiers != nil {
             
             
@@ -123,27 +214,27 @@ class ModifierController {
             for i in modifier.modifiers!{
                 
                 constructModTextRecursion(modifier: i)
+                
             }
 ////            this is supposed to remove the modifier from its position and put it at the end of the list
 //            let index = modifier.isModifierFor.modifiers?.firstIndex(of: modifier)
 ////
 //                modifier.isModifierFor.modifiers?.remove(at: index!)
-////                modifier.isModifierFor.modifiers?.insert(modifier, at: 0)
+//                modifier.isModifierFor.modifiers?.insert(modifier, at: 0)
 //                modifier.isModifierFor.modifiers?.append(modifier)
             
             
 //            if modifier == modifier as? Modifier {
 //                let mod = modifier as! Modifier
-//
-//                let index = mod.isModifierFor.modifiers?.firstIndex(of: modifier as! Modifier)
-//                mod.isModifierFor.modifiers?.remove(at: index!)
-//
-//
-//
-//
+//                
+//                if mod.isModifierFor.modifiers?.isEmpty == false {
+//                    let index = mod.isModifierFor.modifiers?.firstIndex(of: modifier as! Modifier)
+//                    mod.isModifierFor.modifiers?.remove(at: index!)
+//                    mod.isModifierFor.modifiers?.insert(modifier as! Modifier, at: 0)
+//                }
 //            }
         }
-        text.append(modifier.text)
+        
         
 //        print("🆔\(text)")
     }
@@ -228,3 +319,5 @@ class ModifierController {
     
     
 }
+}
+

@@ -24,20 +24,25 @@ class TextTableViewCell: UITableViewCell {
     func setViews(){
         
         
-//        ModifierController.shared.constructModTextRecursion(modifier: orderItem!)
         
+//        adjustUITextViewHeight(arg: modifierTextView)
         
+//        ModifierController.shared.mainItemModRecursion2(modifier: orderItem!)
         
-        ModifierController.shared.mainItemModRecursion2(modifier: orderItem!)
+        ModifierController.shared.addToMainModArray(order: orderItem!)
         
         
 //        ModifierController.shared.sortMods(order: orderItem!)
 //        ModifierController.shared.constructText(for: orderItem!)
-//        print("❌\(orderItem?.modifiers?.count)")
+        
+        
+        
+        
         
         
         orderNameLabel.text = orderItem?.name
-        modifierTextView.text = ModifierController.shared.text.reversed().joined()
+        modifierTextView.text = ModifierController.shared.text.joined()
+//        modifierTextView.text = ModifierController.shared.text.reversed().joined()
         ModifierController.shared.text = []
            
         adjustUITextViewHeight(arg: modifierTextView)
@@ -48,6 +53,27 @@ class TextTableViewCell: UITableViewCell {
 //        arg.translatesAutoresizingMaskIntoConstraints = true
         arg.sizeToFit()
         arg.isScrollEnabled = false
+    }
+    
+    
+    func moreText(){
+        modifierTextView.text.append(contentsOf: "\n text")
+    }
+    @IBAction func button(_ sender: Any) {
+        moreText()
+         adjustUITextViewHeight(arg: modifierTextView)
+//        self.superview?.frame.size.height = modifierTextView.layer.frame.height
+//        self.bounds.size.height = modifierTextView.layer.frame.height
+        
+//        let theSuper = superclass as? TextTableViewCell
+    
+//        super.frame.size.height = modifierTextView.layer.frame.height
+        
+//        self.layer.frame.size.height = modifierTextView.layer.frame.height
+    }
+    
+    override func prepareForReuse() {
+//        adjustUITextViewHeight(arg: modifierTextView)
     }
 
 }

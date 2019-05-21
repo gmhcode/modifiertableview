@@ -12,7 +12,25 @@ class OrderItem{
     
     
     //    var uuid : UUID?
-    var modifiers : [Modifier]?
+    var modifiers : [Modifier]? {
+        didSet{
+//            if modifiers != nil {
+//                for i in modifiers! {
+//                    let index = (modifiers?.firstIndex(of: i))!
+//                    let appendingString = "\n 🔴**End of Mods For \(name)****"
+//                    if index + 1 == modifiers?.count {
+//                        i.text.append(contentsOf: "\n ****End of Mods For \(name)****")
+//                    } else {
+//                        if i.text.contains("🔴"){
+//                            let indexOfString = i.text.firstIndex(of: Character("🔴"))!
+//                            
+//                            i.text.removeLast(appendingString.count)
+//                        }
+//                    }
+//                }
+//            }
+        }
+    }
     var uuid : String
     let name : String
     var text : String = ""
